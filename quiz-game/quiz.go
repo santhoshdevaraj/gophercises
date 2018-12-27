@@ -13,8 +13,8 @@ import (
 
 var questionNumber int
 
-// createMapFromFile converts the CSV file into a map of questions and solution
-func createMapFromFile(csvName *string) map[string]string {
+// getQuestions converts the CSV file into a map of questions and solution
+func getQuestions(csvName *string) map[string]string {
 	csvFile, err := os.Open(*csvName)
 	if err != nil {
 		log.Fatal(err)
@@ -49,7 +49,7 @@ func main() {
 	csvName := flag.String("csv", "problems.csv", "a csv file in the format of 'question, answer'")
 	limit := flag.Float64("limit", 30, "the time limit for the quiz in seconds (default 30)")
 	flag.Parse()
-	questions := createMapFromFile(csvName)
+	questions := getQuestions(csvName)
 	startTime := time.Now()
 	channel := make(chan string)
 	answerCount := 0
