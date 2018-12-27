@@ -7,6 +7,7 @@ import (
 	"io"
 	"log"
 	"os"
+	"strings"
 )
 
 func main() {
@@ -33,7 +34,7 @@ func main() {
 		if err != nil {
 			log.Fatal(err)
 		}
-		if solution == userInput {
+		if solution == strings.Trim(userInput, " ") {
 			correctCount++
 		}
 	}
