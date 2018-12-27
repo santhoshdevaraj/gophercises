@@ -11,12 +11,17 @@ import (
 )
 
 func main() {
-	csvName := flag.String("csv", "problems.csv", "a csv file in the format of 'question, answer' (default 'problems.csv')")
+	// Declare and parse the flags
+	csvName := flag.String("csv", "problems.csv", "a csv file in the format of 'question, answer'")
+	limit := flag.Int("limit", 30, "the time limit for the quiz in seconds (default 30)")
+	shuffle := flag.Bool("shuffle", false, "will shuffle the order of the quiz")
 	flag.Parse()
+	// Open the csvfile and get a io.Reader object
 	csvFile, err := os.Open(*csvName)
 	if err != nil {
 		log.Fatal(err)
 	}
+	// Reads the CSV file, posts question to the user and collects the results
 	r := csv.NewReader(csvFile)
 	problemCount, correctCount, userInput := 0, 0, ""
 	for {
